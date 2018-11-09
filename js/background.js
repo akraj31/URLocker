@@ -1,7 +1,6 @@
 
 var parentTab = {}; // To store the url to redirect after successful authentication
 var correctPasswordEntered = false; // It will take care that once correct password is entered, then all the websites are unlocked till they are locked again or browser is reopened
-var promptOpen = false; // To check and not overwrite the URL to open, when prompt URL is opened
 
 // message types to listen to
 var messgeTypes = {
@@ -20,8 +19,6 @@ chrome.runtime.onMessage.addListener(function(request) {
 
   if(request.type === messgeTypes.lock_all_websites) {
       correctPasswordEntered = false;
-  } else if(request.type === messgeTypes.prompt_closed) {
-      promptOpen = false;
   } else if(request.type === messgeTypes.add_website) {
       addWebsite();
   } else if(request.type === messgeTypes.remove_website) {
@@ -117,9 +114,6 @@ chrome.tabs.onUpdated.addListener(function (tabId, changeInfo, tab) {
     return;
   }
 
-  //if(promptOpen){
-    //return;
-  //}
   if(isPasswordPrompt(tab.url)){
     return;
   }
@@ -131,13 +125,9 @@ chrome.tabs.onUpdated.addListener(function (tabId, changeInfo, tab) {
         chrome.tabs.update({
           url: chrome.extension.getURL('popup.html')
         });
-        promptOpen = true;
       }
     }
   });
-
-
-  // use onactive and query to find the window id and hence the active tab in that window
 });
 
 /**

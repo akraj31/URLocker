@@ -1,7 +1,5 @@
 //document.getElementById("submitBtn").addEventListener("click", submit);
 
-var windowId, tabId;
-
 /**
  * Submit the password form if correct password entered
  */
@@ -23,15 +21,3 @@ function passwordStatus(msg) {
         document.getElementById('error').innerHTML = "wrong password";
     }
 }
-
-window.onunload = function() {
-    chrome.runtime.sendMessage({type:'prompt_closed'});
-}
-
-window.onbeforeunload = function(){
-    chrome.runtime.sendMessage({type:'prompt_closed'});
-}
-
-chrome.tabs.onActivated.addListener(function(tabInfo) {
-    tabId = tabInfo.tabId;
-});
