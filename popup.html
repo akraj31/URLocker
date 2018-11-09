@@ -1,14 +1,25 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Dialog test</title>
+    <title>URLLocker</title>
+    <link rel="stylesheet" type="text/css" href="css/style.css">
 </head>
 <body>
     <form>
-        <input id="pass" type="password">
-        <input type="submit" value="OK">
+    <div class="panel-lite">
+        <div class="thumbur">
+          <div class="icon-lock"></div>
+        </div>
+        <h4>Login</h4>
+        <div class="form-group">
+          <input id="passwd" class="form-control" type="password" required="required"/>
+          <label class="form-label">Password</label>
+        </div>
+        <!--a href="#">Forgot Password ?  </a-->
+        <button id="submitBtn" class="floating-btn"><i class="icon-arrow"></i></button>
+        <span id="error" style="color:red"></span>
+      </div>
     </form>
-    <span id="error" style="color:red"></span>
     <script src="js/popup.js"></script>
 </body>
 </html>

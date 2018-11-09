@@ -1,5 +1,5 @@
 //if (confirm('Open dialog for testing?'))
-chrome.runtime.sendMessage({type:'request_password', url: document.location.href});
+//chrome.runtime.sendMessage({type:'request_password', url: document.location.href});
 
     /*
 // content.js

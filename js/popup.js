@@ -1,12 +1,37 @@
+//document.getElementById("submitBtn").addEventListener("click", submit);
+
+var windowId, tabId;
+
+/**
+ * Submit the password form if correct password entered
+ */
 document.forms[0].onsubmit = function(e) {
     e.preventDefault(); // Prevent submission
-    var password = document.getElementById('pass').value;
+    var password = document.getElementById('passwd').value;
 
-    if(password == "asdf"){// check if password is correct
-        chrome.runtime.getBackgroundPage(function(bgWindow) {
-            bgWindow.handleCorrectPassword();
-        });
-    } else {
+    chrome.runtime.getBackgroundPage(function(bgWindow) {
+        bgWindow.checkPassword(password, passwordStatus);
+    });
+};
+
+/**
+ * Callback when password entered was wrong
+ * @param {*} msg 
+ */
+function passwordStatus(msg) {
+    if(msg.status == false) {
         document.getElementById('error').innerHTML = "wrong password";
     }
-};
+}
+
+window.onunload = function() {
+    chrome.runtime.sendMessage({type:'prompt_closed'});
+}
+
+window.onbeforeunload = function(){
+    chrome.runtime.sendMessage({type:'prompt_closed'});
+}
+
+chrome.tabs.onActivated.addListener(function(tabInfo) {
+    tabId = tabInfo.tabId;
+});

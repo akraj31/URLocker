@@ -5,24 +5,29 @@
     "content_scripts": [
         {
           "matches": [
-            "https://www.google.com/*",
-            "https://www.facebook.com/*"
+            "<all_urls>"
           ],
-          "js": ["js/jquery-1.11.3.min.js", "js/content.js"]
+          "js": ["js/content.js"]
         }
     ],
     "browser_action": {
         "default_icon": "img/icon.png",
-        "default_popup": "popup.html"
+        "default_popup": "menu.html"
     },
 
     "background": {
-        "scripts": ["js/background.js"]
+        "scripts": ["js/background.js"],
+        "persistent": true
     },
     "permissions": [
         "activeTab",
+        "storage",
+		"unlimitedStorage",
         "tabs",
 	    "background",
         "webRequest"
-    ]
+    ],
+
+    "content_security_policy": "script-src 'self' https://ssl.google-analytics.com/ga.js https://example.cc; object-src 'self'"
+
 }
