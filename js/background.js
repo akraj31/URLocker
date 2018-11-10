@@ -38,7 +38,7 @@ function addWebsite(){
 
         var initialData = {
             urls: {
-              "chrome://extensions": 1
+              "chrome://extensions/": 1
             },
             password:  "asdf"
         }
@@ -104,6 +104,20 @@ function isPasswordPrompt(url){
   return false;
 }
 
+/**
+ * To check if the current URL is subpage of already locked URLs
+ */
+function isHomepageLocked(lockedUrls, currentUrl) {
+
+  for(var i = 0; i < lockedUrls.length; ++i) {
+      var subPage = currentUrl.substr(0, lockedUrls[i].length);
+      if(lockedUrls[i] == subPage){
+        return true;
+      }
+  }
+  return false;
+}
+
 
 /**
  * Listener for tab update
@@ -121,10 +135,12 @@ chrome.tabs.onUpdated.addListener(function (tabId, changeInfo, tab) {
   parentTab[tabId] = tab.url;
   chrome.storage.sync.get(['urlockData'], function (response) {
     if (changeInfo && changeInfo.status === 'loading') {
-        if(response.hasOwnProperty('urlockData') && response['urlockData']['urls'].hasOwnProperty(parentTab[tabId])){
-        chrome.tabs.update({
-          url: chrome.extension.getURL('popup.html')
-        });
+      if(response.hasOwnProperty('urlockData')) {
+        if(isHomepageLocked(Object.keys(response['urlockData']['urls']), parentTab[tabId])){
+          chrome.tabs.update({
+            url: chrome.extension.getURL('popup.html')
+          });
+        }
       }
     }
   });
