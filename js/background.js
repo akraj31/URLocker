@@ -12,6 +12,21 @@ var messgeTypes = {
 
 var dataObjName = "urlockData";
 
+chrome.runtime.onInstalled.addListener(function(details){
+  if(details.reason == "install"){
+    console.log("This is a first install! Initializing data");
+    var initialData = {
+      urls: {
+        "chrome://extensions/": 1
+      },
+      password:  "asdf"
+    }
+    chrome.storage.sync.set({ urlockData: initialData }, function () {});
+  }else if(details.reason == "update"){
+    console.log("This is a update!");
+  }
+});
+
 /**
  * Listen and handle for various messages
  */
@@ -33,18 +48,6 @@ chrome.runtime.onMessage.addListener(function(request) {
 function addWebsite(){
 
   chrome.storage.sync.get(["urlockData"] , function (result) {
-    // initialize data if not set already before
-    if (typeof result === 'undefined' || Object.keys(result) == 0) {
-
-        var initialData = {
-            urls: {
-              "chrome://extensions/": 1
-            },
-            password:  "asdf"
-        }
-        chrome.storage.sync.set({ urlockData: initialData }, function () {});
-    }
-
     // add the new URL
     chrome.storage.sync.get(['urlockData'], function (response) {
       chrome.tabs.query({currentWindow: true, active : true}, function(tabArray){

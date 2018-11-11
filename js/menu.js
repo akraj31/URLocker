@@ -1,7 +1,27 @@
 document.getElementById("lockAllBtn").addEventListener("click", lockAll);
+document.getElementById("lockAllBtn").addEventListener("mousedown", clicked);
+document.getElementById("lockAllBtn").addEventListener("mousedown", unclicked);
+
+
 document.getElementById("addWebsiteBtn").addEventListener("click", addWebsite);
+document.getElementById("addWebsiteBtn").addEventListener("mousedown", clicked);
+document.getElementById("addWebsiteBtn").addEventListener("mousedown", unclicked);
+
 document.getElementById("removeWebsiteBtn").addEventListener("click", removeWebsite);
+document.getElementById("removeWebsiteBtn").addEventListener("mousedown", clicked);
+document.getElementById("removeWebsiteBtn").addEventListener("mousedown", unclicked);
+
 document.getElementById("changePasswdBtn").addEventListener("click", changePassword);
+
+
+
+function clicked() {
+    this.style.opacity = 0.7;
+}
+
+function unclicked() {
+    this.style.opacity = 1;
+}
 
 /**
  * Lock all websites, so that next time authentication is required

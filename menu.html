@@ -6,12 +6,17 @@
 </head>
 <body>
     <div class="panel-lite" style="height: 50px;width:220px;">
-        <div >
-          <button id="lockAllBtn" class="icon-lock" style="left:-15px;top:-68px;width:20p;height:50px"></button>
-          <button id="addWebsiteBtn" class="floating-btn" style="bottom:17px; left:-10px"><i class="icon-arrow"></i></button>
-          <button id="removeWebsiteBtn" class="floating-btn" style="bottom:17px; left:125px"><i class="icon-arrow"></i></button>
+        <div style="margin-top: -30px">
+          <!--button id="lockAllBtn" style="left:-15px;top:-68px;width:20p;height:50px"><img src="img/lockBtn.png"></button-->
+          <!--button id="addWebsiteBtn" class="circle-plus" style="bottom:17px; left:-10px"><i class="icon-arrow"></i></button>
+          <button id="removeWebsiteBtn" class="floating-btn" style="bottom:17px; left:125px"><i class="icon-arrow"></i></button-->
+            <inline>
+            <img id="lockAllBtn" title="lock all websites now" style="width:60px;height:60px;float: left;margin-top: -6px;margin-left: -7px;margin-right: 11px;" src="img/lockBtn.png">
+            <img id="addWebsiteBtn" title="add this website to locked list" style="width:50px;height:50px;" src="img/addBtn.png">
+            <img id="removeWebsiteBtn" title="add this website to locked list" style="width:50px;height:50px;float: right;" src="img/removeBtn.png">
+            </inline>
         </div>
-        <div class="form-group">
+        <div class="form-group" style="margin-top: 33px;">
           <input id="oldPasswd" class="form-control" type="password" required="required"/>
           <label class="form-label">Old Password</label>
         </div>
