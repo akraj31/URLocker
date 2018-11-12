@@ -1,15 +1,8 @@
 document.getElementById("lockAllBtn").addEventListener("click", lockAll);
-document.getElementById("lockAllBtn").addEventListener("mousedown", clicked);
-document.getElementById("lockAllBtn").addEventListener("mousedown", unclicked);
-
 
 document.getElementById("addWebsiteBtn").addEventListener("click", addWebsite);
-document.getElementById("addWebsiteBtn").addEventListener("mousedown", clicked);
-document.getElementById("addWebsiteBtn").addEventListener("mousedown", unclicked);
 
 document.getElementById("removeWebsiteBtn").addEventListener("click", removeWebsite);
-document.getElementById("removeWebsiteBtn").addEventListener("mousedown", clicked);
-document.getElementById("removeWebsiteBtn").addEventListener("mousedown", unclicked);
 
 document.getElementById("changePasswdBtn").addEventListener("click", changePassword);
 
@@ -17,6 +10,10 @@ document.getElementById("changePasswdBtn").addEventListener("click", changePassw
 
 function clicked() {
     this.style.opacity = 0.7;
+    var self = this;
+    setTimeout(function() {
+        self.style.opacity = 1;
+    }, 150);
 }
 
 function unclicked() {
@@ -28,6 +25,7 @@ function unclicked() {
  * to open a locked website
  */
 function lockAll() {
+    clicked.call(this);
     chrome.runtime.sendMessage({type:'lock_all_websites'});
 }
 
@@ -35,6 +33,7 @@ function lockAll() {
  * add the current URL to list of locked website
  */
 function addWebsite() {
+    clicked.call(this);
     chrome.runtime.sendMessage({type:'add_website'});
 }
 
@@ -42,6 +41,7 @@ function addWebsite() {
  * remove the current URL from list of locked website
  */
 function removeWebsite() {
+    clicked.call(this);
     chrome.runtime.sendMessage({type:'remove_website'});
 }
 
